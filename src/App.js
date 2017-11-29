@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import ShowProfile from './components/ShowProfile';
 import EditProfile from './components/EditProfile';
+import ToggleButton from 'react-toggle-button'
 
 class App extends Component {
   state = {
@@ -11,7 +12,9 @@ class App extends Component {
       lastName: 'Person',
       // profileImage: 'https://randomuser.me/api/portraits/women/48.jpg'
       profileImage: 'https://pbs.twimg.com/profile_images/887872349743087616/BC_InNdz_400x400.jpg'
-    }
+    },
+    displayProfile: true
+
   }
   
   // when user types in text field
@@ -58,29 +61,54 @@ class App extends Component {
   }
 
   onToggleDisplay = () => {
-    console.log('thonk')
+    console.log(this.state.displayProfile)
+
   }
 
-  // () => this.onToggleDisplay()
 
   render() {
     const user = this.state.user;
 
     return (
       <div className="App">
+        {/* Header */}
+        <div className="header"><h3>Built with</h3> <img src={logo} alt="react logo" /></div>
+
         <h1>Profile Editor</h1>
 
         {/* Toggle Button */}
-        <label>
-          <h3>Show/Edit Toggle</h3>
-          <input type='checkbox' onToggle={ console.log('from render') } />
-        </label>
+        <div className="toggle-button-container">
+          <ToggleButton
+            inactiveLabel='Show'
+            activeLabel='Edit'
+            value={ this.state.displayProfile || false }
+            onToggle={(value) => {
+              this.setState({
+                displayProfile: !value,
+              })
+              console.log({value})
+              this.onToggleDisplay();
+            }} 
+          />
+        </div>
 
         {/* Render the ShowProfile Component */}
-        <ShowProfile user={user}/>
+
+        {
+          this.state.displayProfile &&
+            <ShowProfile user={user}/>
+        }
 
         {/* Render the EditProfile Component */}
-        <EditProfile user={user} />
+        {
+          !this.state.displayProfile &&
+            <EditProfile user={user} 
+              onChangeFirstName={this.onChangeFirstName}
+              onChangeLastName={this.onChangeLastName}
+              onChangeProfileImage={this.onChangeProfileImage}
+            />
+         }
+        
 
       </div>
     );
