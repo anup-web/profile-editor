@@ -16,15 +16,40 @@ class App extends Component {
   // this function is called
   // the event provides info on what happened
   onChangeFirstName = (event) => {
-     // get the <input>
-     const input = event.target
-     // get the current inputted text
-     const newFirstName = input.value
+    // get the <input>
+    const input = event.target
+    // get the current inputted text
+    const newFirstName = input.value
     this.setState((prevState) => {
       const user = prevState.user
       user.firstName = newFirstName
       return {
         // this.state.user will be updated
+        user: user
+      }
+    })
+  }
+
+  onChangeLastName = (event) => {
+    // get input from user
+    const input = event.target
+    const newLastName = input.value
+    this.setState((prevState) => {
+      const user = prevState.user
+      user.lastName = newLastName
+      return {
+        user: user
+      }
+    })
+  }
+
+  onChangeProfileImage = (event) => {
+    const input = event.target
+    const newProfileImage = input.value
+    this.setState((prevState) => {
+      const user = prevState.user
+      user.profileImage = newProfileImage
+      return {
         user: user
       }
     })
@@ -39,13 +64,35 @@ class App extends Component {
         <img src={user.profileImage} />
         <p><strong>Name: </strong>{user.firstName} {user.lastName}</p>
 
-        <label>
-          First name: {' '}
-          <input 
-          value={user.firstName} 
-          onChange={this.onChangeFirstName}
-          />
-        </label>  
+        <div className="edit-fields">
+          <h3>Edit Details</h3>
+          {/* First Name Field */}
+          <label>
+            First name: {' '}
+            <input 
+            value={user.firstName} 
+            onChange={this.onChangeFirstName}
+            />
+          </label>
+          <br />
+          {/* Last Name Field */}
+          <label>
+            Last name: {' '}
+            <input 
+            value={user.lastName} 
+            onChange={this.onChangeLastName}
+            />
+          </label>
+          <br />
+          {/* Profile Image Field */}
+          <label>
+            Profile Iimage URL: {' '}
+            <input 
+            value={user.profileImage} 
+            onChange={this.onChangeProfileImage}
+            />
+          </label>
+        </div>   
       </div>
     );
   }
