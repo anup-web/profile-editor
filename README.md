@@ -4,6 +4,8 @@ A simple profile editor
 
 *Built with React*
 
+![](/docs/images/screenshot.png)
+
 ## Models
 
 ### User
