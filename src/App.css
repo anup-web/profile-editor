@@ -10,10 +10,15 @@ img {
   max-width: 180px;
 }
 
-.edit-fields {
+.edit-profile {
   border: 1px solid cadetblue;
   padding: 10px;
   margin: 20px auto;
   width: 500px;
   border-radius: 5px;
+}
+
+.edit-field {
+  margin: 20px;
+  padding: 20px;
 }

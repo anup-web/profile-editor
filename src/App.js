@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ShowProfile from './components/ShowProfile';
+import EditProfile from './components/EditProfile';
 
 class App extends Component {
   state = {
@@ -55,44 +57,31 @@ class App extends Component {
     })
   }
 
+  onToggleDisplay = () => {
+    console.log('thonk')
+  }
+
+  // () => this.onToggleDisplay()
+
   render() {
     const user = this.state.user;
 
     return (
       <div className="App">
         <h1>Profile Editor</h1>
-        <img src={user.profileImage} />
-        <p><strong>Name: </strong>{user.firstName} {user.lastName}</p>
 
-        <div className="edit-fields">
-          <h3>Edit Details</h3>
-          {/* First Name Field */}
-          <label>
-            First name: {' '}
-            <input 
-            value={user.firstName} 
-            onChange={this.onChangeFirstName}
-            />
-          </label>
-          <br />
-          {/* Last Name Field */}
-          <label>
-            Last name: {' '}
-            <input 
-            value={user.lastName} 
-            onChange={this.onChangeLastName}
-            />
-          </label>
-          <br />
-          {/* Profile Image Field */}
-          <label>
-            Profile Iimage URL: {' '}
-            <input 
-            value={user.profileImage} 
-            onChange={this.onChangeProfileImage}
-            />
-          </label>
-        </div>   
+        {/* Toggle Button */}
+        <label>
+          <h3>Show/Edit Toggle</h3>
+          <input type='checkbox' onToggle={ console.log('from render') } />
+        </label>
+
+        {/* Render the ShowProfile Component */}
+        <ShowProfile user={user}/>
+
+        {/* Render the EditProfile Component */}
+        <EditProfile user={user} />
+
       </div>
     );
   }
